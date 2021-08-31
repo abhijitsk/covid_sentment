@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang = "en">
+    <head>
+        <title>Sentiment Analysis</title>
+        <style>
+        ul { background-color: #524b6b;
+            margin: 0;
+
+            }
+        </style>
+    </head>
+</html>
+
+<ul>
+    <h1 style="text-align:center">This site22222222 is for twitter sentiment analysis!!!</h1>
+</ul>
+
+
+<!--For the getting all the tweets listed --> 
+<body>
+    <div>
+        {% if tweet %}
+            <img src ="data:image/png;base64, {{tweet|safe}}">
+        {% endif %}
+        {% if wordplot %}
+            <img src ="data:image/png;base64, {{wordplot|safe}}">
+        {% endif %}
+    </div>
+    
+
+
+</body>
+<body>
+    <div>
+        {% if chart2 %}
+            <img src ="data:image/png;base64, {{chart2|safe}}">
+        {% endif %}
+
+        {% if wordplot %}
+            <img src ="data:image/png;base64, {{wordplot2|safe}}">
+        {% endif %}
+    </div>
+</body>
+<body>
+    <div>
+        {% if chart2 %}
+            <img src ="data:image/png;base64, {{chart3|safe}}">
+        {% endif %}
+
+        {% if wordplot %}
+            <img src ="data:image/png;base64, {{wordplot3|safe}}">
+        {% endif %}
+    </div>
+</body>
+

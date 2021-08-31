@@ -1,0 +1,93 @@
+{%load static%}
+
+
+
+<!doctype html>
+
+<html lang = "en">
+    <head>
+        <title>Sentiment Analysis</title>
+        <style>
+        ul { background-color: #524b6b;
+            margin: 0;
+
+            }
+        table{
+            background-color:#d6fcfc;
+            width : auto;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        table tbody{
+            border: 1px solid;
+            overflow: auto;
+            height: 150px;
+
+            width: 100%;
+        }
+        table td{
+            border: 1px solid;
+        }
+        table thead {
+            padding: 1px;
+            text-align: center;
+            width: 200px;
+            color: blueviolet;
+        }
+
+        </style>
+    </head>
+</html>
+
+<ul>
+    <h1 style="text-align:center">This site is for twitter sentiment analysis!!!</h1>
+</ul>
+
+
+
+
+<!--For the getting all the tweets listed --> 
+
+<div style=" width =320px; height:380px; overflow:scroll"> 
+    {%if data%}
+    <table class = "table">       
+        <thead style="font-size: medium;">            
+            <tr>
+                {%for k in data%}
+                <th scope = "col">{{k}}</th>
+                {% endfor %}
+            </tr>            
+        </thead>
+    {% endif %}   
+        <tbody style=" font-size:small">
+            {% for k in data2%}
+            <tr>
+                {%for d in k.values%}
+                    <td>{{d}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+<div>
+<body>
+    <div>
+        {% if pie_chart_naive %}
+            <img src ="data:image/png;base64, {{pie_chart_naive|safe}}" height="250px", width="350px">
+        {% endif %}
+
+        {% if pie_chart_RF %}
+            <img src ="data:image/png;base64, {{pie_chart_RF|safe}}" height="250px", width="350px">
+        {% endif %}
+        {% if pie_chart_SVM %}
+            <img src ="data:image/png;base64, {{pie_chart_SVM|safe}}" height="250px", width="350px">
+        {% endif %}
+
+    </div>
+</body>
+</div>
+
+

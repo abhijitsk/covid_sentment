@@ -1,0 +1,38 @@
+<!doctype html>
+
+<html lang = "en">
+    <head>
+        <title>Sentiment Analysis</title>
+        <style>
+        ul { background-color: #524b6b;
+            margin: 0;
+
+            }
+        </style>
+    </head>
+</html>
+
+<ul>
+    <h1 style="text-align:center">This site is for twitter sentiment analysis!!!</h1>
+</ul>
+
+<body>
+    <button onclick="location.href = '{% url 'visualization' %}'">Download tweet</button><hr>
+
+</body>
+
+
+
+
+<!--For the getting all the tweets listed --> 
+
+<div>
+    <ol>
+        {% for text in tweet%}
+        <li>{{text}}</li>
+        {% endfor %}
+    </ol>
+</div>
+
+
+
