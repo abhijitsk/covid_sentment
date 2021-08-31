@@ -2,7 +2,6 @@ from django.apps import AppConfig
 from django.conf import settings
 import os
 import pickle
-from . import streamer1
 from keras.preprocessing.sequence import pad_sequences
 from keras.models import load_model
 
@@ -15,8 +14,8 @@ from keras.models import load_model
 
 class HomeConfig(AppConfig):
 
-    name = 'dbMongo'
-    
+    name = 'home'
+    print(settings.MODELS)
     path = os.path.join(settings.MODELS,'models.p')
     
 
