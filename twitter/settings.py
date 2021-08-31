@@ -26,10 +26,10 @@ SECRET_KEY = '=_^^fhj79&*cm#&nk783v=+gn6u9qxqidy^c79$te516sfjckk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['178.128.167.248']
 
 
-MODELS = os.path.join(BASE_DIR, 'home\\models')
+MODELS = os.path.join(BASE_DIR, 'home/models')
 
 
 

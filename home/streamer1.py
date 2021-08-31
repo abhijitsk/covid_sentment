@@ -9,6 +9,9 @@ from nltk.corpus import stopwords
 import re
 from wordcloud import WordCloud
 import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
 
 
 

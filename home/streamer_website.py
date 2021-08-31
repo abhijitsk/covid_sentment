@@ -3,8 +3,6 @@ import tweepy
 from pymongo import MongoClient
 import json
 import sys
-from .twitter_credentials import *
-#from twitter_credentials import *
 import pandas as pd
 from .streamer1 import *
 import os
