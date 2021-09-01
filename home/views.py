@@ -20,7 +20,7 @@ import tweepy
 
 def home(request):
     
-    return render(request,'home.html',{'tweet':streamer_website.tweets_for_website})
+    return HttpResponse('Hi')
 
 
 def second(request):
@@ -54,12 +54,14 @@ class call_model(APIView):
            
             prediction = HomeConfig.Naive_bayes.predict(test_tfidf)
             prediction_svm = HomeConfig.SVM.predict(test_tfidf)
+            prediction_RF = HomeConfig.Random_Forrest.predict(test_tfidf)
 
             
     
             
             outfile = pd.DataFrame(prediction, columns = ['Naive_bayes'])
             outfile['SVM'] = prediction_svm
+            outfile['Rand_forrest'] = prediction_RF
             
             outfile['text'] = text
             outfile['text_original'] = text_original
@@ -72,6 +74,7 @@ class call_model(APIView):
     
 
             pie_chart_naive = streamer1.plotting(prediction.tolist(),'Naive Bayes')
+            pie_chart_RF = streamer1.plotting(prediction_RF.tolist(), 'Random Forrest')
             
 
     
@@ -86,7 +89,7 @@ class call_model(APIView):
             response = {'data':data, 
                         'data2':data2,
                         'pie_chart_naive':pie_chart_naive,
-                        
+                        'pie_chart_RF':pie_chart_RF,
                         'pie_chart_SVM':pie_chart_SVM}
                         #'pie_chart_LSTM':pie_chart_LSTM}
 
@@ -95,4 +98,4 @@ class call_model(APIView):
 
 
             #return HttpResponse(outfile.to_html())
-            return render(request,'prefictions.html',response)
+            return render(request,'predictions.html',response)
