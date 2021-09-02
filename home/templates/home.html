@@ -1,4 +1,12 @@
 <!doctype html>
+<style>
+    .tweet{
+        height: 500px;
+
+        overflow: auto;
+    }
+</style>
+
 
 <html lang = "en">
     <head>
@@ -8,6 +16,7 @@
             margin: 0;
 
             }
+        
         </style>
     </head>
 </html>
@@ -16,7 +25,7 @@
     <h1 style="text-align:center">This site is for twitter sentiment analysis!!!</h1>
 </ul>
 
-<body>
+<body style="background-position: center;">
     <button onclick="location.href = '{% url 'visualization' %}'">Download tweet</button><hr>
 
 </body>
@@ -26,13 +35,26 @@
 
 <!--For the getting all the tweets listed --> 
 
-<div>
-    <ol>
-        {% for text in tweet%}
-        <li>{{text}}</li>
-        {% endfor %}
-    </ol>
+
+<div class ="tweet"> 
+    <div style="width: 500px; ">
+        <ol>
+            {% for text in tweet%}
+                <li>{{text}}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div style="width: 500px; right:0cm; ">
+        <ol>
+            {% for text in preprocessed%}
+                <li>{{text}}</li>
+            {% endfor %}
+        </ol>
+    </div>
 </div>
 
 
+<div class ="tweet"> 
+   
+</div>
 

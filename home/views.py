@@ -19,8 +19,13 @@ import tweepy
 # Create your views here.
 
 def home(request):
+    file_home = streamer_website.tweets_pandas
+    home_tweets = file_home['liveTweets']
+    pre_home = file_home['preprocessed']
+
     
-    return HttpResponse('Hi')
+    return render(request,'home.html',{'tweet':home_tweets,'preprocessed':pre_home})
+    #return HttpResponse('Hi')
 
 
 def second(request):
@@ -37,10 +42,13 @@ class call_model(APIView):
 
             api = streamer_website.api
             
-            for tweet in tweepy.Cursor(api.search, q = ("#corona"+"-filter:retweets"),count = 100, lang= 'en', tweet_mode = 'extended').items(100):
+            for tweet in tweepy.Cursor(api.search, q = ("#corona OR #pandemic OR #COVID"+"-filter:retweets"),count = 200, 
+                                                                        lang= 'en', tweet_mode = 'extended').items(100):
                 tweets_for_website.append(tweet.full_text)
+                print(tweet.retweeted)
 
             tweets_pandas = pd.DataFrame(tweets_for_website, columns=['liveTweets'])
+            tweets_pandas.drop_duplicates()
             tweets_pandas['preprocessed'] = tweets_pandas['liveTweets'].apply(streamer1.preprocess)
 
             text =tweets_pandas['preprocessed'].tolist()
@@ -65,6 +73,7 @@ class call_model(APIView):
             
             outfile['text'] = text
             outfile['text_original'] = text_original
+            
             json_file = outfile.to_json()
 
             data = json.loads(json_file)
