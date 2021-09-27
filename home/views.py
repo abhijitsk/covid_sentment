@@ -25,14 +25,9 @@ def home(request):
 
     
     return render(request,'home.html',{'tweet':home_tweets,'preprocessed':pre_home})
-    #return HttpResponse('Hi')
 
 
-def second(request):
-    #chart1 = streamer1.plotting()
-    #wordplot = streamer1.plot_wordcloud()
 
-    return HttpResponse('hi')
 
 class call_model(APIView):
     
@@ -45,7 +40,7 @@ class call_model(APIView):
             for tweet in tweepy.Cursor(api.search, q = ("#corona OR #pandemic OR #COVID"+"-filter:retweets"),count = 200, 
                                                                         lang= 'en', tweet_mode = 'extended').items(100):
                 tweets_for_website.append(tweet.full_text)
-                print(tweet.retweeted)
+                
 
             tweets_pandas = pd.DataFrame(tweets_for_website, columns=['liveTweets'])
             tweets_pandas.drop_duplicates()
@@ -57,12 +52,16 @@ class call_model(APIView):
 
             
             vector = HomeConfig.count_vect.transform(text)
-            #complete_words_Naive = [word for word in HomeConfig.vectorizer.vocabulary_.keys()]
             test_tfidf = HomeConfig.tfidf_vect.transform(vector)
+            test_LSTM = HomeConfig.LSTM_tokenizer.texts_to_sequences(text)
+            test_LSTM = streamer1.pad_sequences(test_LSTM,maxlen= 31, padding='post')
            
             prediction = HomeConfig.Naive_bayes.predict(test_tfidf)
             prediction_svm = HomeConfig.SVM.predict(test_tfidf)
             prediction_RF = HomeConfig.Random_Forrest.predict(test_tfidf)
+            prediction_LSTM = HomeConfig.LSTM.predict(test_LSTM)
+            prediction_LSTM1 = streamer1.process_forKeras(prediction_LSTM)
+           
 
             
     
@@ -70,6 +69,7 @@ class call_model(APIView):
             outfile = pd.DataFrame(prediction, columns = ['Naive_bayes'])
             outfile['SVM'] = prediction_svm
             outfile['Rand_forrest'] = prediction_RF
+            outfile['ANN_LSTM'] = prediction_LSTM1
             
             outfile['text'] = text
             outfile['text_original'] = text_original
@@ -88,6 +88,7 @@ class call_model(APIView):
 
     
             pie_chart_SVM = streamer1.plotting(prediction_svm.tolist(), 'SVM')
+            pie_chart_LSTM = streamer1.plotting(prediction_LSTM1,'LSTM')
             #wordplot2 = streamer1.plot_wordcloud(' '.join(text)) # features names
 
             #pie_chart_LSTM = streamer1.plotting(predictionLSTM, )
@@ -99,12 +100,12 @@ class call_model(APIView):
                         'data2':data2,
                         'pie_chart_naive':pie_chart_naive,
                         'pie_chart_RF':pie_chart_RF,
-                        'pie_chart_SVM':pie_chart_SVM}
-                        #'pie_chart_LSTM':pie_chart_LSTM}
+                        'pie_chart_SVM':pie_chart_SVM,
+                        'pie_chart_LSTM':pie_chart_LSTM}
 
         
 
 
 
-            #return HttpResponse(outfile.to_html())
+            
             return render(request,'predictions.html',response)

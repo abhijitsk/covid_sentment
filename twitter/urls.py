@@ -20,6 +20,5 @@ import home.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home.views.home, name = "home" ),
-    path('result/', home.views.second, name = "second" ),
     path('classify/', home.views.call_model.as_view(), name = "visualization" ),
 ]

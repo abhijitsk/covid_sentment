@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 import re
 from wordcloud import WordCloud
 import nltk
+from keras.preprocessing.sequence import pad_sequences
 nltk.download('stopwords')
 nltk.download('punkt')
 nltk.download('wordnet')
@@ -16,7 +17,7 @@ nltk.download('wordnet')
 
 
 def process_forKeras(predictions):
-    check_label = ['anger','fear','joy','sad']
+    check_label = ['worry','neutral','happiness','sadness']
     predictions_list = [check_label[np.argmax(text)] for text in predictions]
     
 

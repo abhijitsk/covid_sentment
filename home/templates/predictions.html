@@ -88,7 +88,10 @@
         {% if pie_chart_SVM %}
             <img src ="data:image/png;base64, {{pie_chart_SVM|safe}}" height="250px", width="350px">
         {% endif %}
-
+        {% if pie_chart_LSTM %}
+            <img src ="data:image/png;base64, {{pie_chart_LSTM|safe}}" height="250px", width="350px">
+        {% endif %}
+        
     </div>
 </body>
 </div>

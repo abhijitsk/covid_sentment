@@ -18,6 +18,3 @@ for tweet in tweepy.Cursor(api.search, q = ("#corona OR #pandemic OR #COVID"+"-f
 
 tweets_pandas = pd.DataFrame(tweets_for_website, columns = ['liveTweets'])
 tweets_pandas['preprocessed'] = tweets_pandas['liveTweets'].apply(preprocess)
-
-
-

@@ -29,14 +29,13 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-MODELS = os.path.join(BASE_DIR, 'home/models')
+MODELS = os.path.join(BASE_DIR, 'home\\models')
 
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    #'home.apps.HomeConfig.dbMongo',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
