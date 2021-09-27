@@ -17,7 +17,7 @@ class HomeConfig(AppConfig):
     name = 'home'
     path = os.path.join(settings.MODELS,'models.p')
     path2 = os.path.join('F:\\website\\tweets_download\\twitter\\home\\models\\','models_RF.p')
-    path3 = os.path.join('F:\\website\\tweets_download\\twitter\\home\\models\\','model_full_features1.h5')
+    path3 = os.path.join('F:\\website\\tweets_download\\twitter\\home\\models\\','model_full_features.h5')
     path4 = os.path.join('F:\\website\\tweets_download\\twitter\\home\\models\\','tokenizer_lstm')
 
     with open(path,'rb') as pickled:
